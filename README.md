@@ -412,6 +412,81 @@ MEOW is the recommended pattern:
 6. **Progress monitoring** - Track through convoy status
 7. **Completion** - Mayor summarizes results
 
+## Development
+
+### Building from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/steveyegge/gastown.git
+cd gastown
+
+# Build locally (creates ./gt)
+make build
+
+# Verify the build
+./gt version
+```
+
+### Using Local Build
+
+There are several ways to use your local build instead of the released version:
+
+**Option 1: Install to GOPATH/bin** (recommended if using `go install`)
+
+```bash
+make install-go
+# Replaces the binary at ~/go/bin/gt
+```
+
+**Option 2: Install to ~/.local/bin**
+
+```bash
+make install
+# Installs to ~/.local/bin/gt
+# Ensure ~/.local/bin is in your PATH before ~/go/bin
+```
+
+**Option 3: Run directly from build**
+
+```bash
+# Build and run without installing
+make build
+./gt version
+
+# Or use an alias in your shell config
+alias gt="/path/to/gastown/gt"
+```
+
+### Verifying Which Version is Running
+
+```bash
+# Check which binary is being used
+which gt
+
+# Check version and build info
+gt version
+# Shows: gt version X.Y.Z (commit: abc1234, built: 2025-01-10T12:00:00Z)
+```
+
+The version output includes:
+- Version tag (from git describe)
+- Commit hash (for exact source identification)
+- Build timestamp (to verify it's your local build)
+
+### Switching Between Versions
+
+To switch between local and released versions:
+
+```bash
+# Use released version
+go install github.com/steveyegge/gastown/cmd/gt@latest
+
+# Use local version
+cd /path/to/gastown
+make install-go
+```
+
 ## Shell Completions
 
 ```bash
