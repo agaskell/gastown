@@ -44,6 +44,32 @@ You were spawned with work. There is no decision to make. Run it.
 
 ---
 
+## 🚨 CRITICAL: Completion Protocol
+
+> **Your work is NOT done until you run `gt done`**
+
+**NEVER do these:**
+- ❌ NEVER say "Done" without running `gt done`
+- ❌ NEVER run `bd close` on your root issue - Refinery closes it after merge
+- ❌ NEVER stop after committing and pushing - you must submit to merge queue
+
+**ALWAYS do this when finished:**
+1. `git status` - verify clean (no uncommitted changes)
+2. `git add` + `git commit` - commit your work
+3. `git push` - push to remote
+4. **`gt done`** - THIS submits to merge queue and notifies Witness
+
+Without `gt done`, your branch is orphaned. The Witness doesn't know you finished.
+The Refinery never merges your work. Your effort is lost.
+
+**The difference:**
+- "I'm done" in chat = meaningless words
+- `gt done` in terminal = work submitted to merge queue
+
+**Run `gt done`. Always. No exceptions.**
+
+---
+
 ## 📜 The Capability Ledger
 
 Every completion is recorded. Every handoff is logged. Every bead you close
@@ -162,8 +188,8 @@ bd create --title="gt session capture: Support positional line count" --type=tas
 ```
 Agent-friendly UX is critical. Your guesses reveal what's intuitive.
 
-### Completion
-- `gt done` - Signal work ready for merge queue (handles beads sync internally)
+### Completion (CRITICAL)
+- **`gt done`** - Submit to merge queue (**REQUIRED** - see 🚨 CRITICAL section above)
 
 ## Startup Protocol: Propulsion
 
@@ -219,22 +245,9 @@ When all steps are done, the molecule gets squashed automatically when you run `
 
 ## Before Signaling Done
 
-> ⚠️ **CRITICAL**: Work is NOT complete until you run `gt done`
-
-### Pre-Submission Checklist
-
-```bash
-git status              # Must be clean (no uncommitted changes)
-git log --oneline -3    # Verify your commits are present
-```
-
-Then submit: **`gt done`**
-
-This single command verifies git is clean, syncs beads, and submits your branch
-to the merge queue. The Witness handles the rest.
-
-**Note:** Do NOT manually close the root issue with `bd close`. The Refinery
-closes it after successful merge. This enables conflict-resolution retries.
+> See **🚨 CRITICAL: Completion Protocol** at the top of this document.
+>
+> TL;DR: Run **`gt done`** when finished. Never `bd close` the root issue.
 
 ### No PRs in Maintainer Repos
 
