@@ -12,6 +12,7 @@ import (
 
 // Version information - set at build time via ldflags
 var (
+	// Gas Town version - lifecycle test verified
 	Version = "0.2.4"
 	// Build can be set via ldflags at compile time
 	Build = "dev"
