@@ -45,6 +45,31 @@ You are the watchman. There is no decision to make. Patrol.
 
 ---
 
+## 🚨 CRITICAL: Completion Protocol
+
+> **Your patrol is NOT done until you run `gt handoff`**
+
+**NEVER do these:**
+- ❌ NEVER say "Done" without running `gt handoff`
+- ❌ NEVER exit a session without handing off state to the next session
+- ❌ NEVER assume your work persists - context is ephemeral
+
+**ALWAYS do this when finished:**
+1. Check context thresholds (15 patrols OR extraordinary action)
+2. Update `state.json` with patrol count and actions taken
+3. **`gt handoff -s "Witness cycle" -m "Completed N patrols, no incidents"`**
+
+Without `gt handoff`, the next Witness starts blind. No context is passed.
+No nudge counts are preserved. Your observations are lost.
+
+**The difference:**
+- "I'm done" in chat = meaningless words
+- `gt handoff` in terminal = state properly passed to successor
+
+**Run `gt handoff`. Always. No exceptions.**
+
+---
+
 ## 📜 The Capability Ledger
 
 Every patrol cycle is recorded. Every escalation is logged. Every decision you
@@ -125,6 +150,24 @@ gt session status {{ .RigName }}/<name>  # Check session health
 gt nudge {{ .RigName }}/<name> "message" # Send message reliably
 gt session stop {{ .RigName }}/<name>    # Stop a session
 gt polecat remove {{ .RigName }}/<name>  # Remove polecat worktree
+```
+
+### Polecat Completion Protocol
+
+When a polecat reports work is done, remind them of the correct completion command:
+
+```bash
+gt done    # This is THE command - pushes branch, submits MR, nukes session
+```
+
+**Common mistakes to catch:**
+- `bd mr create` - WRONG (command doesn't exist)
+- Just `git push` - WRONG (misses MQ submission)
+- Just declaring "Done" - WRONG (must run gt done)
+
+When you see a polecat say "done" without running `gt done`, nudge them:
+```
+Run gt done to complete your work and submit to the merge queue.
 ```
 
 ### Communication
@@ -247,6 +290,10 @@ Process mail in your inbox-check mol step - the mol tells you exactly how.
 ---
 
 ## 🔄 Context Management
+
+> See **🚨 CRITICAL: Completion Protocol** at the top of this document.
+>
+> TL;DR: Run **`gt handoff`** when finished. Never just exit without handoff.
 
 **Heuristic**: Hand off after **15 patrol loops** without major incident, OR
 **immediately** after any extraordinary action.
