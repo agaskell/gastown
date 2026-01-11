@@ -97,6 +97,11 @@ func runPrime(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("getting current directory: %w", err)
 	}
 
+	// Validate flag combinations: --state cannot be combined with other flags
+	if primeState && (primeHookMode || primeDryRun || primeExplain) {
+		return fmt.Errorf("--state cannot be combined with other flags")
+	}
+
 	townRoot, err := workspace.FindFromCwd()
 	if err != nil {
 		return fmt.Errorf("finding workspace: %w", err)
